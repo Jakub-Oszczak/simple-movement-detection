@@ -9,7 +9,7 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (1, 1), 0)
     if not first_run:
-        subtracted = cv2.subtract(blurred, previous_frame)
+        subtracted = cv2.absdiff(blurred, previous_frame)
         (T, threshInv) = cv2.threshold(subtracted, 50, 255, cv2.THRESH_BINARY)
         dilated = cv2.dilate(threshInv, None, iterations=1)
         contours, _ = cv2.findContours(threshInv, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
